@@ -1,0 +1,18 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.input {
+    display: block;
+    width: 100%;
+    padding: 0 16px;
+    margin-bottom: 32px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    height: 52px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    outline-color: $primary;
+    &:focus {
+        border-color: $primary;
+    }
+}

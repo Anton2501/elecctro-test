@@ -1,0 +1,48 @@
+// Base palette
+$base-01: #FFFFFF;
+$base-02: #F6F6F6;
+$base-03: #EDEDED;
+$base-04: #D7D7D7;
+$base-05: #B0B0B0;
+$base-06: #959595;
+$base-07: #808080;
+$base-08: rgba(27, 31, 59, 0.8);
+$base-09: #000000;
+$primary: #3377BB;
+$primary-hover: #4B8CCE;
+$primary-active: #2A6198;
+$secondary: rgba(52, 120, 188, 0.08);
+$secondary-hover: rgba(52, 120, 188, 0.16);
+$secondary-active: rgba(51, 119, 187, 0.24);
+$accent: #F2DF0D;
+$accent-hover: #EADC48;
+$accent-active: #EADC48;
+$clear: rgba(0, 0, 0, 0.08);
+$clear-hover: rgba(0, 0, 0, 0.16);
+$clear-active: rgba(0, 0, 0, 0.2);
+// Text
+$text-01: rgba(27, 31, 59, 0.8);
+$text-02: rgba(27, 31, 59, 0.65);
+$text-03: rgba(27, 31, 59, 0.4);
+$link: #3377BB;
+$link-hover: #5391D0;
+$positive: #3AA981;
+$positive-hover: #7AC5AA;
+$negative: #E52020;
+$negative-hover: #E38163;
+// Status
+$success-fill: #4AC99B;
+$success-bg-hover: rgba(74, 201, 155, 0.24);
+$success-bg: rgba(74, 201, 155, 0.12);
+$error-fill: #E52020;
+$error-bg-hover: rgba(244, 87, 37, 0.24);
+$error-bg: rgba(244, 87, 37, 0.12);
+$info-fill: #70B6F6;
+$info-bg-hover: rgba(112, 182, 246, 0.24);
+$info-bg: rgba(112, 182, 246, 0.12);
+$warning-fill: #FFC700;
+$warning-bg-hover: rgba(255, 199, 0, 0.24);
+$warning-bg: rgba(255, 199, 0, 0.12);
+$neutral-fill: #79818C;
+$neutral-bg-hover: rgba(121, 129, 140, 0.24);
+$neutral-bg: rgba(121, 129, 140, 0.12);

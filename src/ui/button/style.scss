@@ -1,0 +1,32 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.button {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 32px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0px;
+    font-family: inherit;
+    padding: 16px 36px;
+    font-size: 17px;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 32px;
+    border: none;
+    cursor: pointer;
+    color: $text-01;
+    background-color: $clear;
+    transition: background-color ease 0.1s;
+    span {
+        display: inline-block;
+        vertical-align: bottom;
+        font-weight: 800;
+    }
+    &:disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+}

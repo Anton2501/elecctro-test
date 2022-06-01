@@ -14,7 +14,7 @@ function Checkbox({ checked, className, onChange, id }: ICheckboxProps) {
         [onChange]
     );
     return (
-        <span className={`checkbox${className ? `${className}` : ""}`}>
+        <span className={`checkbox${className ? ` ${className}` : ""}`}>
             <input
                 type="checkbox"
                 className="checkbox__input"

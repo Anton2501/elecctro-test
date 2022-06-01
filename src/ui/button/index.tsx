@@ -6,7 +6,7 @@ function Button({ className, onClick, type, disabled, children }: IButtonProps) 
     return (
         <button
             type={type ? type : 'button'}
-            className={`button${className ? `${className}` : ""}`}
+            className={`button${className ? ` ${className}` : ""}`}
             onClick={onClick}
             disabled={disabled}
         >

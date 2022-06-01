@@ -1,0 +1,52 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    line-height: 24px;
+    border-bottom: 1px solid #eee;
+    &__check-group {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        margin-right: 20px;
+    }
+    &__action-btn {
+        padding: 0 8px;
+        line-height: 24px;
+        font-weight: 700;
+        background-color: transparent;
+        color: $primary;
+        border: none;
+        cursor: pointer;
+        &:active {
+            color: $primary-active;
+        }
+    }
+    &__separator {
+        margin-bottom: 3px;
+        color: $text-01;
+    }
+    &__input {
+        width: 100%;
+        height: 24px;
+        margin-bottom: 0;
+        padding: 0 2px 0 0;
+        font-size: 16px;
+        line-height: 24px;
+        border: none;
+        border-radius: 0;
+        outline: none;
+        resize: none;
+        &:focus {
+            border: none;
+        }
+    }
+    .button {
+        width: 130px;
+        margin-left: 16px;
+        flex-shrink: 0;
+    }
+}

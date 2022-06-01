@@ -1,0 +1,9 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.todo-list{
+    &__header {
+        margin-bottom: 32px;
+        cursor: pointer;
+    }
+}

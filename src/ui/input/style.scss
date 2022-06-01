@@ -4,15 +4,16 @@
 .input {
     display: block;
     width: 100%;
-    padding: 0 16px;
+    padding: 0 32px;
     margin-bottom: 32px;
     border: 2px solid #ccc;
     font-size: 16px;
-    height: 52px;
-    border-radius: 4px;
+    line-height: 52px;
+    height: 56px;
+    border-radius: 32px;
     transition: all 0.2s ease;
-    outline-color: $primary;
+    outline: none;
     &:focus {
-        border-color: $primary;
+        border: 2px solid $primary;
     }
 }

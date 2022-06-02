@@ -171,7 +171,11 @@ h6 {
 }
 
 .app {
-  width: 50vw;
+  width: 100%;
   margin: 0 auto;
-  padding: 52px 0;
+  padding: 52px 16px;
+
+  @media (min-width: $ipad-portrait) {
+    width: 50vw;
+  }
 }

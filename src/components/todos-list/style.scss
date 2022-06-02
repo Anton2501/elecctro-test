@@ -6,4 +6,11 @@
         margin-bottom: 32px;
         cursor: pointer;
     }
+    &__check-group {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        margin-right: 20px;
+        margin-top: 52px;
+    }
 }

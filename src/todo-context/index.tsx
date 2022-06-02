@@ -1,75 +1,157 @@
-import React from 'react';
+import React from "react";
 
 type Todo = {
-    id: string;
-    label: string;
-    isCompleted: boolean;
-}
+  id: string;
+  label: string;
+  isCompleted: boolean;
+  created: number;
+};
 
 interface ITodoContext {
-    list: Todo[];
-    addTodo: Function;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onDelete: (id: string) => void;
-    onEdit: (text: string, id: string) => void;
+  list: Todo[];
+  addTodo: Function;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onDelete: (id: string) => void;
+  onEdit: (text: string, id: string) => void;
+  leaveOnlyChecked: boolean;
+  setLeaveOnlyChecked: Function;
+  headerClickedTimes: number;
+  countClickHeader: Function;
 }
 
 export const TodoContext = React.createContext<ITodoContext>({
-    list: [],
-    addTodo: () => undefined,
-    onChange: () => undefined,
-    onDelete: () => undefined,
-    onEdit: () => undefined,
+  list: [],
+  addTodo: () => undefined,
+  onChange: () => undefined,
+  onDelete: () => undefined,
+  onEdit: () => undefined,
+  leaveOnlyChecked: false,
+  setLeaveOnlyChecked: () => undefined,
+  headerClickedTimes: 0,
+  countClickHeader: () => undefined,
 });
 
-TodoContext.displayName = 'TodoContext';
+TodoContext.displayName = "TodoContext";
 
 export function Provider({ children }: { children: React.ReactNode }) {
-    const [list, updateList] = React.useState<Todo[]>([]);
+  const localState = JSON.parse(localStorage.getItem("todo-list") || "[]");
+  const [list, updateList] = React.useState<Todo[]>(localState);
+  const [leaveOnlyChecked, setLeaveOnlyChecked] =
+    React.useState<boolean>(false);
 
-    const addTodo = React.useCallback((text: string) => {
-        const updatedList = [...list];
-        updatedList.push({
-            id: `${text}#`,
-            label: text,
-            isCompleted: false,
-        });
-        updateList(updatedList);
-    }, [list, updateList]);
+  const [headerClickedTimes, countClickHeader] = React.useState<number>(0);
 
-    const onChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const updatedList = list.map(item => {
-            if (e.target.id === item.id) {
-                return { ...item, isCompleted: e.target.checked}
+  const clickHeaderTimesRef = React.useRef(0);
+
+  React.useEffect(() => {
+    if (headerClickedTimes === 0 && clickHeaderTimesRef.current !== 0) {
+      updateList(
+        [...list]
+          .sort((a, b) => {
+            if (a.created < b.created) {
+              return -1;
             }
-            return item;
-        });
-        updateList(updatedList);
-    }, [list, updateList]);
+            return 1;
+          })
+          .reverse()
+      );
+      clickHeaderTimesRef.current = 0;
+    }
 
-    const onDelete = React.useCallback((id: string) => {
-        const updatedList = list.filter(item => id !== item.id);
-        updateList(updatedList);
-    }, [list, updateList]);
+    if (headerClickedTimes === 1 && clickHeaderTimesRef.current !== 1) {
+      updateList(
+        [...list].sort((a, b) => {
+          if (a.label < b.label) {
+            return -1;
+          }
+          return 1;
+        })
+      );
+      clickHeaderTimesRef.current = 1;
+    }
 
-    const onEdit = React.useCallback((text: string, id: string) => {
-        const updatedList = list.map(item => {
-            if (id === item.id) {
-                return { ...item, label: text }
+    if (headerClickedTimes === 2 && clickHeaderTimesRef.current !== 2) {
+      updateList(
+        [...list]
+          .sort((a, b) => {
+            if (a.label < b.label) {
+              return -1;
             }
-            return item;
-        });
-        updateList(updatedList);
-    }, [list, updateList]);
+            return 1;
+          })
+          .reverse()
+      );
+      clickHeaderTimesRef.current = 2;
+    }
+  }, [headerClickedTimes, list]);
 
-    return (
-        <TodoContext.Provider value={{ list, addTodo, onChange, onDelete, onEdit }}>
-            {children}
-        </TodoContext.Provider>
-    )
+  const addTodo = React.useCallback(
+    (text: string) => {
+      const updatedList = [...list];
+      updatedList.push({
+        id: `${text}#`,
+        label: text,
+        isCompleted: false,
+        created: new Date().getTime(),
+      });
+      updateList(updatedList);
+    },
+    [list, updateList]
+  );
+
+  const onChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const updatedList = list.map((item) => {
+        if (e.target.id === item.id) {
+          return { ...item, isCompleted: e.target.checked };
+        }
+        return item;
+      });
+      updateList(updatedList);
+    },
+    [list, updateList]
+  );
+
+  const onDelete = React.useCallback(
+    (id: string) => {
+      const updatedList = list.filter((item) => id !== item.id);
+      updateList(updatedList);
+    },
+    [list, updateList]
+  );
+
+  const onEdit = React.useCallback(
+    (text: string, id: string) => {
+      const updatedList = list.map((item) => {
+        if (id === item.id) {
+          return { ...item, label: text };
+        }
+        return item;
+      });
+      updateList(updatedList);
+    },
+    [list, updateList]
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem("todo-list", JSON.stringify(list));
+  }, [list]);
+
+  return (
+    <TodoContext.Provider
+      value={{
+        list,
+        addTodo,
+        onChange,
+        onDelete,
+        onEdit,
+        leaveOnlyChecked,
+        setLeaveOnlyChecked,
+        headerClickedTimes,
+        countClickHeader,
+      }}
+    >
+      {children}
+    </TodoContext.Provider>
+  );
 }
-
-// function withTodo(Component: React.Component) {
-//     const value = React.useContext(TodoContext);
-//     return <Component state={state} />;
-// }

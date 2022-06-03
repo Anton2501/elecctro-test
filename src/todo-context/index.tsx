@@ -39,7 +39,8 @@ export function Provider({ children }: { children: React.ReactNode }) {
   const [leaveOnlyChecked, setLeaveOnlyChecked] =
     React.useState<boolean>(false);
 
-  const [headerClickedTimes, countClickHeader] = React.useState<number>(0);
+  const localHeaderClickCounter = +JSON.parse(localStorage.getItem("headerClickedCounter") || "0")
+  const [headerClickedTimes, countClickHeader] = React.useState<number>(localHeaderClickCounter);
 
   const clickHeaderTimesRef = React.useRef(0);
 
@@ -136,6 +137,10 @@ export function Provider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     localStorage.setItem("todo-list", JSON.stringify(list));
   }, [list]);
+
+  React.useEffect(() => {
+    localStorage.setItem("headerClickedCounter", JSON.stringify(headerClickedTimes));
+  }, [headerClickedTimes]);
 
   return (
     <TodoContext.Provider

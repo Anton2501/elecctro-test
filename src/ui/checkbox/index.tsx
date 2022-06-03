@@ -21,7 +21,6 @@ function Checkbox({ checked, className, onChange, id }: ICheckboxProps) {
                 checked={checked}
                 id={id}
                 onChange={onChange}
-                onKeyDown={onKeyDown}
             />
             <label className="checkbox__square" htmlFor={id} tabIndex={0} onKeyDown={onKeyDown}>
                 {checked && <IconCheck color="#fff" />}

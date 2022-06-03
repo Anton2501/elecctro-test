@@ -11,7 +11,7 @@ function CreateTodo() {
   const createTodo = React.useCallback(
     (e: any) => {
       e.preventDefault();
-      addTodo(value);
+      if (value) addTodo(value);
       updateValue("");
     },
     [value, addTodo]
@@ -25,7 +25,7 @@ function CreateTodo() {
         onChange={({ target }) => updateValue(target.value)}
         id="type"
       />
-      <Button type="submit" onClick={createTodo} disabled={false}>
+      <Button type="submit" onClick={createTodo} disabled={!value}>
         Create
       </Button>
     </form>

@@ -24,11 +24,16 @@
         vertical-align: bottom;
         font-weight: 800;
     }
+    &:active {
+        background-color: $primary-active;
+    }
     &:disabled {
         opacity: 0.5;
         cursor: default;
     }
-    &:active {
-        background-color: $primary-active;
+    &:active.button:disabled {
+        background-color: $primary;
+        cursor: default;
     }
+    
 }

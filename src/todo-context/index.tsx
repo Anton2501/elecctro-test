@@ -115,8 +115,10 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   const onDelete = React.useCallback(
     (id: string) => {
-      const updatedList = list.filter((item) => id !== item.id);
-      updateList(updatedList);
+      const arr = [...list];
+      const index = arr.findIndex((item) => id === item.id);
+      arr.splice(index, 1);
+      updateList(arr);
     },
     [list, updateList]
   );
